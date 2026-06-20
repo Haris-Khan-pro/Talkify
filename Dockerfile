@@ -21,7 +21,7 @@ WORKDIR /app
 COPY backend/package.json backend/package-lock.json ./
 RUN npm install --no-audit --no-fund
 COPY backend/ ./
-RUN npm run build
+RUN mkdir -p dist && cp -r src/. dist/
 
 # --- Stage 3: runtime image (only prod deps + built assets) ---
 # Express serves API routes and static files from public/.
