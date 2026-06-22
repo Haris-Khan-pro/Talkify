@@ -86,6 +86,15 @@ Visit `http://localhost:<PORT>`.
 ```bash
 docker build --build-arg VITE_CLERK_PUBLISHABLE_KEY=pk_your_key -t talkify .
 docker run --env-file backend/.env -e NODE_ENV=production -p 3001:3001 talkify
+
+cd frontend
+npm run build
+cd ../backend
+rm -rf public && cp -r ../frontend/dist ./public
+NODE_ENV=production node src/index.js
+
+ngrok http 3000
+
 ```
 
 ### Testing the Clerk webhook locally
